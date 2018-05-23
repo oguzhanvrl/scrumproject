@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Storys">
+          <Key>
+            <PropertyRef Name="story_id" />
+          </Key>
+          <Property Name="story_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="startingDate" Type="date" />
+          <Property Name="endingDate" Type="date" />
+          <Property Name="state" Type="nvarchar(max)" />
+          <Property Name="deadline" Type="int" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="task_id" />
+          </Key>
+          <Property Name="task_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="story_id" Type="int" />
+          <Property Name="worker_id" Type="int" />
+          <Property Name="taskName" Type="nvarchar(max)" />
+          <Property Name="details" Type="nvarchar(max)" />
+          <Property Name="commitmentDate" Type="date" />
+          <Property Name="endingDate" Type="date" />
+          <Property Name="state" Type="nvarchar(max)" />
+          <Property Name="deadline" Type="int" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="worker_id" />
+          </Key>
+          <Property Name="worker_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="color" Type="nvarchar(max)" />
+          <Property Name="experience" Type="int" />
+        </EntityType>
+        <EntityContainer Name="ProjectDBModelStoreContainer">
+          <EntitySet Name="Storys" EntityType="Self.Storys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Storys">
+          <Key>
+            <PropertyRef Name="story_id" />
+          </Key>
+          <Property Name="story_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="startingDate" Type="DateTime" Precision="0" />
+          <Property Name="endingDate" Type="DateTime" Precision="0" />
+          <Property Name="state" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="deadline" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="task_id" />
+          </Key>
+          <Property Name="task_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="story_id" Type="Int32" />
+          <Property Name="worker_id" Type="Int32" />
+          <Property Name="taskName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="commitmentDate" Type="DateTime" Precision="0" />
+          <Property Name="endingDate" Type="DateTime" Precision="0" />
+          <Property Name="state" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="deadline" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="worker_id" />
+          </Key>
+          <Property Name="worker_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="experience" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="ProjectDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Storys" EntityType="Self.Storys" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
+          <EntitySetMapping Name="Storys">
+            <EntityTypeMapping TypeName="ProjectDBModel.Storys">
+              <MappingFragment StoreEntitySet="Storys">
+                <ScalarProperty Name="story_id" ColumnName="story_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="startingDate" ColumnName="startingDate" />
+                <ScalarProperty Name="endingDate" ColumnName="endingDate" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="ProjectDBModel.Tasks">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="task_id" ColumnName="task_id" />
+                <ScalarProperty Name="story_id" ColumnName="story_id" />
+                <ScalarProperty Name="worker_id" ColumnName="worker_id" />
+                <ScalarProperty Name="taskName" ColumnName="taskName" />
+                <ScalarProperty Name="details" ColumnName="details" />
+                <ScalarProperty Name="commitmentDate" ColumnName="commitmentDate" />
+                <ScalarProperty Name="endingDate" ColumnName="endingDate" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="ProjectDBModel.Workers">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="worker_id" ColumnName="worker_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
